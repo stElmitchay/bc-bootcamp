@@ -1,6 +1,7 @@
 "use client";
 
-import { usePrivy, useWallets } from "@privy-io/react-auth";
+import { usePrivy } from "@privy-io/react-auth";
+import { useWallets as useSolanaWallets } from "@privy-io/react-auth/solana";
 import Image from "next/image";
 import { ToastContainer } from "react-toastify";
 
@@ -10,10 +11,7 @@ import { ArrowLeftIcon } from "@heroicons/react/16/solid";
 
 function Home() {
   const { ready, authenticated, logout, login } = usePrivy();
-  const { wallets } = useWallets();
-  const solanaWallets = (wallets ?? []).filter(
-    (wallet) => wallet.chainType === "solana",
-  );
+  const { wallets: solanaWallets } = useSolanaWallets();
   const primaryWallet = solanaWallets[0];
 
   if (!ready) {
